@@ -16,7 +16,7 @@ with lib;
     };
   };
 
-  config = mkIf config.environment.editorIsVim 
+  config = mkIf config.environment.editorIsVim
   {
     environment.shellInit = ''
         export EDITOR=vim
