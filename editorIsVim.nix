@@ -21,6 +21,14 @@ with lib;
     environment.shellInit = ''
         export EDITOR=vim
     '';
-    environment.systemPackages = [ pkgs.vim ];
+
+    environment.systemPackages = [
+      (pkgs.vim_configurable.customize {
+        name = "vim";
+        vimrcConfig.packages.myplugins = with pkgs.vimPlugins; {
+          start = [ vim-nix sensible ]; # load plugin on startup
+        };
+      })
+    ];
   };
 }
