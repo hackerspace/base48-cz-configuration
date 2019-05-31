@@ -1,9 +1,11 @@
 { config, pkgs, lib, ...}:
-
+with lib;
 {
-  time.timeZone = lib.mkDefault "Europe/Amsterdam";
+  time.timeZone = mkDefault "Europe/Amsterdam";
+  services.openssh.enable = mkDefault true;
 
-  services.tor.client.enable = true;
+  services.tor.client.enable = mkDefault true;
+  programs.bash.enableCompletion = mkDefault true;
 
   environment.systemPackages = with pkgs; [
     wget
