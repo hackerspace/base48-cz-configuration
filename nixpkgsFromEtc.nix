@@ -1,7 +1,12 @@
 { config, lib, ... } :
+with lib;
 {
-  nix.nixPath = [ "/etc" "nixos-config=/etc/nixos/configuration.nix" ];
-  nix.useSandbox = true;
-  nix.maxJobs = lib.mkDefault 8;
+  options = {
+    base.nixpkgsFromEtc.enable = mkEnableOption "Use nixpkgs from /etc/nixpkgs";
+  };
+
+  config = mkIf config.base.nixpkgsFromEtc.enable {
+    nix.nixPath = [ "nixpkgs=/etc/nixpkgs" ];
+  };
 }
 
